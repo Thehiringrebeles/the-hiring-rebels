@@ -133,6 +133,39 @@ export function CTA() {
               </button>
             </form>
           </div>
+
+          <div className="mt-8 rounded-[28px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:p-8">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-blue-300/95">Direct Contact</p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-[#03050a]/60 p-4">
+                <p className="text-sm uppercase tracking-[0.25em] text-white/45">Email</p>
+                <a href="mailto:hr@thehiringrebels.com" className="mt-2 block text-base font-medium text-white transition hover:text-blue-200">
+                  hr@thehiringrebels.com
+                </a>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-[#03050a]/60 p-4">
+                <p className="text-sm uppercase tracking-[0.25em] text-white/45">Phone</p>
+                <a href="tel:+918200240914" className="mt-2 block text-base font-medium text-white transition hover:text-blue-200">
+                  +91 8200240914
+                </a>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-[#03050a]/60 p-4">
+                <p className="text-sm uppercase tracking-[0.25em] text-white/45">Address</p>
+                <p className="mt-2 text-base font-medium text-white">Ahmedabad, Gujarat, India</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-[#03050a]/60 p-4">
+                <p className="text-sm uppercase tracking-[0.25em] text-white/45">LinkedIn</p>
+                <a
+                  href="https://www.linkedin.com/company/the-hiring-rebels/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-2 block text-base font-medium text-white transition hover:text-blue-200"
+                >
+                  the-hiring-rebels
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>
