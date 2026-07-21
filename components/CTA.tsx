@@ -1,24 +1,72 @@
-const trustedBrands = ['Northstar Labs', 'Helio Systems', 'Atlas Capital', 'Aurelia Health', 'Lumen Grid'];
+const whyChooseFeatures = [
+  {
+    title: 'IT & Technology Hiring',
+    description:
+      'Specialized hiring for software, product, engineering, cloud, AI, cybersecurity, QA, DevOps, and technical leadership roles.',
+    icon: '↗',
+  },
+  {
+    title: 'Global Talent Acquisition',
+    description:
+      'Supporting hiring across India and international markets with a streamlined recruitment process.',
+    icon: '◌',
+  },
+  {
+    title: 'AI-Powered Candidate Sourcing',
+    description:
+      'Leveraging AI tools, LinkedIn Talent Intelligence, Boolean search, and advanced sourcing strategies to identify top talent.',
+    icon: '✦',
+  },
+  {
+    title: 'Fast & Efficient Hiring',
+    description:
+      'Optimized recruitment workflows designed to reduce hiring time while maintaining exceptional candidate quality.',
+    icon: '⚡',
+  },
+  {
+    title: 'Personalized Recruitment Partnership',
+    description:
+      'Every client receives dedicated support, transparent communication, and a hiring strategy tailored to their business.',
+    icon: '◎',
+  },
+  {
+    title: 'Quality-First Approach',
+    description:
+      'We believe successful hiring is about long-term fit, not just filling vacancies.',
+    icon: '✓',
+  },
+];
 
 export function CTA() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="rounded-[40px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_30px_90px_rgba(15,23,42,0.35)] backdrop-blur-xl lg:p-10" data-animate>
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-blue-300/95">Trusted by Growing Companies Worldwide</p>
-              <h2 className="mt-4 text-2xl font-semibold tracking-[-0.02em] text-white sm:text-3xl">
-                Trusted by founders, hiring leaders, and global operators scaling across regions.
-              </h2>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {trustedBrands.map((brand) => (
-                <div key={brand} className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-white/75 backdrop-blur-xl">
-                  {brand}
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-blue-300/95">WHY CHOOSE HIRING REBELS</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">
+              Recruitment Built for Speed, Quality & Growth
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-white/70">
+              Hiring Rebels partners with startups, technology companies, and growing businesses to deliver exceptional talent through strategic recruitment, AI-powered sourcing, and a highly personalized hiring experience. We focus on quality over quantity, helping companies hire the right people faster.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {whyChooseFeatures.map((feature, index) => (
+              <div
+                key={feature.title}
+                className="group rounded-[28px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl shadow-[0_18px_55px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-2 hover:border-blue-400/35 hover:bg-white/[0.08]"
+                data-animate
+                style={{ transitionDelay: `${index * 70}ms` }}
+              >
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600/25 to-blue-400/20 text-lg font-semibold text-blue-100 transition duration-300 group-hover:scale-105">
+                  {feature.icon}
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
+                <p className="mt-3 text-base leading-7 text-white/65">{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
