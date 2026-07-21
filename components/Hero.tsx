@@ -1,10 +1,12 @@
+import { BrandLogo } from './BrandLogo';
+
 export function Hero() {
   return (
     <section id="home" className="mx-auto max-w-7xl px-6 py-24 sm:py-28 lg:px-8 lg:py-36">
       <div className="grid gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div className="max-w-3xl" data-animate>
           <div className="mb-6 inline-flex items-center rounded-full border border-blue-400/30 bg-blue-600/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.35em] text-blue-200/95 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
-            <span className="mr-2 h-2.5 w-2.5 rounded-full bg-blue-500" />
+            <BrandLogo variant="mark" className="mr-3 h-8 w-8" />
             GLOBAL TALENT PARTNER
           </div>
 

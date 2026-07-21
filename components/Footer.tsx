@@ -1,9 +1,13 @@
+import { BrandLogo } from './BrandLogo';
+
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black/20">
       <div className="mx-auto grid max-w-7xl gap-8 px-6 py-10 text-sm text-white/60 md:grid-cols-4 lg:px-8">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/85">Company</p>
+          <div className="flex items-center gap-3">
+            <BrandLogo className="h-10 w-auto" />
+          </div>
           <div className="mt-4 space-y-2">
             <p>The Hiring Rebels</p>
             <p>Global Talent Partner</p>
