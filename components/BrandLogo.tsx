@@ -7,7 +7,7 @@ type BrandLogoProps = {
 };
 
 export function BrandLogo({ className = "", variant = "full", priority = false }: BrandLogoProps) {
-  const src = variant === "mark" ? "/logo-hiring-rebels-mark.svg" : "/logo-hiring-rebels.svg";
+  const src = "/logo/logo.svg";
   const width = variant === "mark" ? 56 : 240;
   const height = variant === "mark" ? 56 : 58;
 
