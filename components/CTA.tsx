@@ -1,5 +1,3 @@
-import { BrandLogo } from './BrandLogo';
-
 const whyChooseFeatures = [
   {
     title: 'IT & Technology Hiring',
@@ -45,10 +43,7 @@ export function CTA() {
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
         <div className="rounded-[40px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_30px_90px_rgba(15,23,42,0.35)] backdrop-blur-xl lg:p-10" data-animate>
           <div className="max-w-3xl">
-            <div className="flex items-center gap-3">
-              <BrandLogo variant="mark" className="h-10 w-10" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-blue-300/95">WHY CHOOSE HIRING REBELS</p>
-            </div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-blue-300/95">WHY CHOOSE HIRING REBELS</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">
               Recruitment Built for Speed, Quality & Growth
             </h2>

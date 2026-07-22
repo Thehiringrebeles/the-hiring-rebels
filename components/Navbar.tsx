@@ -1,5 +1,3 @@
-import { BrandLogo } from './BrandLogo';
-
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
@@ -18,8 +16,11 @@ export function Navbar({ mobileMenuOpen, setMobileMenuOpen }: NavbarProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0A0A0A]/80 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <a href="#home" className="flex items-center gap-3" aria-label="The Hiring Rebels home">
-          <BrandLogo className="h-10 w-auto sm:h-12" />
+        <a href="#home" className="flex flex-col">
+          <span className="text-[0.8rem] font-semibold uppercase tracking-[0.35em] text-blue-200/95">
+            THE HIRING REBELS
+          </span>
+          <span className="text-sm text-white/55">Discovering Real Talent</span>
         </a>
 
         <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">

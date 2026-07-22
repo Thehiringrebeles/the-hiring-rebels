@@ -63,8 +63,7 @@ export const metadata: Metadata = {
       "Helping companies hire exceptional talent through strategic recruitment, executive search, and AI-powered sourcing.",
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico", sizes: "any" }],
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.ico",
   },
 };
 
