@@ -183,9 +183,9 @@ export function ItRecruitmentPageContent() {
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
-                <a href="mailto:hello@thehiringrebels.com?subject=Hire%20Talent" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
+                <Link href="/#contact" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
                   Hire Talent
-                </a>
+                </Link>
                 <a href="mailto:hello@thehiringrebels.com?subject=Free%20Consultation" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
                   Book Free Consultation
                 </a>
@@ -368,12 +368,12 @@ export function ItRecruitmentPageContent() {
                 Whether you&apos;re hiring one engineer or building an entire technology team, The Hiring Rebels is your trusted recruitment partner.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <a href="mailto:hello@thehiringrebels.com?subject=Hire%20Talent" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
+                <Link href="/#contact" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
                   Hire Talent
-                </a>
-                <a href="mailto:hello@thehiringrebels.com?subject=Contact%20Us" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
+                </Link>
+                <Link href="/#contact" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
                   Contact Us
-                </a>
+                </Link>
               </div>
             </div>
           </div>
