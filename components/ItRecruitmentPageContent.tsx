@@ -1,10 +1,82 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Footer } from './Footer';
 
-const reasons = [
+const trustItems = [
+  {
+    title: 'AI Powered Recruitment',
+    description: 'Intelligent sourcing and market mapping for high-fit candidates.',
+    icon: 'spark' as const,
+  },
+  {
+    title: 'Fast Turnaround',
+    description: 'Rapid shortlisting and engagement with zero compromise on quality.',
+    icon: 'bolt' as const,
+  },
+  {
+    title: 'Global Talent Network',
+    description: 'Access exceptional candidates across regions and time zones.',
+    icon: 'globe' as const,
+  },
+  {
+    title: 'Technical Screening',
+    description: 'A rigorous review process for engineering, product, and data talent.',
+    icon: 'shield' as const,
+  },
+  {
+    title: 'Dedicated Recruiter',
+    description: 'A single point of contact who understands your hiring goals deeply.',
+    icon: 'user' as const,
+  },
+  {
+    title: 'Quality First Hiring',
+    description: 'A premium experience backed by thoughtful assessment and care.',
+    icon: 'star' as const,
+  },
+];
+
+const comparisonPoints = {
+  traditional: [
+    'Random CVs',
+    'Slow response',
+    'Generic candidate search',
+    'Poor communication',
+    'Limited talent network',
+  ],
+  rebels: [
+    'AI powered sourcing',
+    'Dedicated recruiter',
+    'Technical screening',
+    'Premium candidate experience',
+    'Transparent communication',
+  ],
+};
+
+const proofCards = [
+  {
+    title: 'Startups',
+    description: 'Executive and technical hiring that moves fast without losing precision.',
+  },
+  {
+    title: 'Product Companies',
+    description: 'Hiring strategies designed for velocity, product quality, and scale.',
+  },
+  {
+    title: 'Growing Enterprises',
+    description: 'Enterprise-grade recruitment support for high-impact technology teams.',
+  },
+];
+
+const stats = [
+  { value: 95, suffix: '%', label: 'Offer Acceptance Rate', animate: true },
+  { value: 10, suffix: ' Days', label: 'Average Shortlisting', animate: true },
+  { value: 24, suffix: ' Hours', label: 'Initial Candidate Response', animate: true },
+  { value: 'Quality', suffix: '', label: 'Human + AI Recruitment', animate: false },
+];
+
+const roles = [
   {
     title: 'AI Powered Candidate Sourcing',
     description: 'We combine intelligent sourcing with founder-level market insight to reach highly qualified candidates before your competitors do.',
@@ -105,6 +177,85 @@ const faqItems = [
   },
 ];
 
+function FeatureIcon({ type }: { type: 'spark' | 'bolt' | 'globe' | 'shield' | 'user' | 'star' }) {
+  const commonClassName = 'h-5 w-5 text-blue-100';
+
+  switch (type) {
+    case 'spark':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" className={commonClassName} aria-hidden="true">
+          <path d="M12 2.5L13.8 8.2L19.5 10L13.8 11.8L12 17.5L10.2 11.8L4.5 10L10.2 8.2L12 2.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case 'bolt':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" className={commonClassName} aria-hidden="true">
+          <path d="M13 2L5 13h5l-1 9 8-11h-5l1-9Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case 'globe':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" className={commonClassName} aria-hidden="true">
+          <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M3.5 12h17M12 3.5c2.2 2 3.5 4.4 3.5 8.5s-1.3 6.5-3.5 8.5M12 3.5c-2.2 2-3.5 4.4-3.5 8.5S9.8 18.5 12 20.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case 'shield':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" className={commonClassName} aria-hidden="true">
+          <path d="M12 3l7 3v5c0 4.6-2.6 7.9-7 10-4.4-2.1-7-5.4-7-10V6l7-3Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    case 'user':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" className={commonClassName} aria-hidden="true">
+          <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M5.5 19c1.3-3 3.8-4.5 6.5-4.5s5.2 1.5 6.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case 'star':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" className={commonClassName} aria-hidden="true">
+          <path d="M12 3.5l2.2 4.5 4.9.7-3.6 3.5.9 4.9-4.4-2.4-4.4 2.4.9-4.9L5 8.7l4.9-.7L12 3.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
+function CounterValue({ target, suffix }: { target: number; suffix: string }) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    let cancelled = false;
+    const duration = 1200;
+    const startTime = window.performance.now();
+
+    const animate = (now: number) => {
+      if (cancelled) return;
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const nextValue = Math.round(target * eased);
+      setValue(nextValue);
+
+      if (progress < 1) {
+        frame = window.requestAnimationFrame(animate);
+      }
+    };
+
+    frame = window.requestAnimationFrame(animate);
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+    };
+  }, [target]);
+
+  return <span>{value}{suffix}</span>;
+}
+
 export function ItRecruitmentPageContent() {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-animate]'));
@@ -183,12 +334,12 @@ export function ItRecruitmentPageContent() {
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
-                <Link href="/#contact" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
+                <Link href="/#contact" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
                   Hire Talent
                 </Link>
-                <a href="mailto:hello@thehiringrebels.com?subject=Free%20Consultation" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
+                <Link href="/#contact" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
                   Book Free Consultation
-                </a>
+                </Link>
               </div>
 
               <div className="mt-10 flex flex-wrap gap-3 text-sm text-white/60">
@@ -230,18 +381,68 @@ export function ItRecruitmentPageContent() {
           <div className="rounded-[36px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_20px_80px_rgba(0,0,0,0.25)] backdrop-blur-2xl sm:p-10">
             <div className="mb-10 max-w-3xl" data-animate>
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-blue-300">Why Companies Choose The Hiring Rebels</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Premium recruitment support for ambitious hiring teams.</h2>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Premium recruiting support built for trust, speed and long-term hiring success.</h2>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {reasons.map((reason, index) => (
-                <div key={reason.title} className="rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6 transition duration-300 hover:-translate-y-1 hover:border-blue-400/35" data-animate style={{ transitionDelay: `${index * 80}ms` }}>
+            <div className="grid gap-6 lg:grid-cols-2">
+              <article className="rounded-[28px] border border-white/10 bg-[#05070b]/70 p-7 shadow-[0_18px_55px_rgba(0,0,0,0.2)] transition duration-300 hover:-translate-y-1.5" data-animate>
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600/25 to-blue-400/20 text-blue-100">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+                      <path d="M6 6L18 18M6 18L18 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">Traditional Recruiters</h3>
+                </div>
+                <ul className="space-y-3 text-base leading-7 text-white/65">
+                  {comparisonPoints.traditional.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 text-lg text-blue-300">✕</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+
+              <article className="rounded-[28px] border border-blue-400/20 bg-gradient-to-br from-blue-600/10 via-white/[0.04] to-transparent p-7 shadow-[0_18px_55px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1.5" data-animate>
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600/25 to-blue-400/20 text-blue-100">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+                      <path d="M5 12.5L9.5 17L19 7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">The Hiring Rebels</h3>
+                </div>
+                <ul className="space-y-3 text-base leading-7 text-white/70">
+                  {comparisonPoints.rebels.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1 text-lg text-blue-300">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-10" aria-labelledby="proof-title">
+          <div className="rounded-[36px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_20px_80px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:p-10">
+            <div className="mb-8 max-w-3xl" data-animate>
+              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-blue-300">Trusted Hiring Partner</p>
+              <h2 id="proof-title" className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Helping startups, product companies and growing enterprises hire exceptional talent across India and globally.</h2>
+              <p className="mt-5 text-lg leading-8 text-white/70">We support ambitious hiring teams with executive-grade service, premium candidate experience and a recruitment approach tailored to modern technology businesses.</p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {proofCards.map((card, index) => (
+                <article key={card.title} className="rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6 transition duration-300 hover:-translate-y-1.5" data-animate style={{ transitionDelay: `${index * 80}ms` }}>
                   <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600/25 to-blue-400/20 text-sm font-semibold text-blue-100">
                     0{index + 1}
                   </div>
-                  <h3 className="text-xl font-semibold text-white">{reason.title}</h3>
-                  <p className="mt-3 text-base leading-7 text-white/65">{reason.description}</p>
-                </div>
+                  <h3 className="text-xl font-semibold text-white">{card.title}</h3>
+                  <p className="mt-3 text-base leading-7 text-white/65">{card.description}</p>
+                </article>
               ))}
             </div>
           </div>
@@ -307,34 +508,26 @@ export function ItRecruitmentPageContent() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
+        <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16" aria-labelledby="results-title">
           <div className="overflow-hidden rounded-[40px] border border-blue-400/20 bg-gradient-to-br from-blue-600/12 via-white/[0.04] to-transparent p-8 shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:p-10 lg:p-12">
-            <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
               <div data-animate>
                 <p className="text-sm font-semibold uppercase tracking-[0.35em] text-blue-300">Why The Hiring Rebels</p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Premium hiring outcomes built on quality, clarity and speed.</h2>
+                <h2 id="results-title" className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Premium hiring outcomes designed for modern technology teams.</h2>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-white/70">
-                  We combine AI-powered sourcing with human-led recruitment strategy to help you hire the right people faster without sacrificing quality or cultural fit.
+                  We combine AI-powered sourcing with human-led recruitment strategy to help you hire faster, with greater precision and stronger long-term results.
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2" data-animate>
-                <div className="rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6">
-                  <p className="text-4xl font-semibold text-white">95%</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.25em] text-white/55">Offer Acceptance Rate</p>
-                </div>
-                <div className="rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6">
-                  <p className="text-4xl font-semibold text-white">10-Day</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.25em] text-white/55">Average Shortlisting</p>
-                </div>
-                <div className="rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6">
-                  <p className="text-4xl font-semibold text-white">Global</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.25em] text-white/55">Talent Network</p>
-                </div>
-                <div className="rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6">
-                  <p className="text-4xl font-semibold text-white">Quality</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.25em] text-white/55">First Hiring</p>
-                </div>
+                {stats.map((stat, index) => (
+                  <div key={stat.label} className="group rounded-[24px] border border-white/10 bg-[#05070b]/70 p-6 transition duration-300 hover:-translate-y-1.5" style={{ transitionDelay: `${index * 80}ms` }}>
+                    <p className="text-4xl font-semibold text-white">
+                      {stat.animate ? <CounterValue target={stat.value as number} suffix={stat.suffix} /> : stat.value}
+                    </p>
+                    <p className="mt-2 text-sm uppercase tracking-[0.25em] text-white/55">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -360,19 +553,19 @@ export function ItRecruitmentPageContent() {
         </section>
 
         <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16" id="contact">
-          <div className="rounded-[40px] border border-blue-400/20 bg-gradient-to-br from-blue-600/12 via-white/[0.04] to-transparent p-8 text-center shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:p-10 lg:p-12">
+          <div className="rounded-[44px] border border-blue-400/20 bg-gradient-to-br from-blue-600/14 via-white/[0.05] to-transparent p-8 text-center shadow-[0_20px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:p-10 lg:p-12">
             <div className="mx-auto max-w-3xl" data-animate>
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-blue-300">Final CTA</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Build Your Dream Tech Team</h2>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.02em] text-white sm:text-4xl">Ready To Build Your Dream Tech Team?</h2>
               <p className="mt-5 text-lg leading-8 text-white/70">
-                Whether you&apos;re hiring one engineer or building an entire technology team, The Hiring Rebels is your trusted recruitment partner.
+                Whether you&apos;re hiring your first software engineer or scaling an entire technology department, The Hiring Rebels delivers premium recruitment solutions designed for speed, quality and long-term hiring success.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <Link href="/#contact" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
+                <Link href="/#contact" className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_44px_rgba(37,99,235,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_54px_rgba(37,99,235,0.45)]">
                   Hire Talent
                 </Link>
-                <Link href="/#contact" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
-                  Contact Us
+                <Link href="/#contact" className="rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white/85 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08]">
+                  Book Free Consultation
                 </Link>
               </div>
             </div>
